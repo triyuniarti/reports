@@ -16,6 +16,7 @@ use Illuminate\Database\Query\Builder;
 use Session;
 use Auth;
 use DB;
+use Yajra\Datatables\Datatables;
 
 class UserController extends Controller
 {
@@ -29,7 +30,7 @@ class UserController extends Controller
         $id = Auth::id();
         //Menampilkan semua isi tabel reports berdasarkan id user yang sedang login kedalam variabel
         $report = Reports::where('user_id', '=', $id)->get();
-
+        
         //tampilkan view
         return view('users.user_home', compact('report'));
     }

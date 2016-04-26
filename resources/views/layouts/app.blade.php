@@ -103,7 +103,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
-            $('#reports').DataTable();
+            $('#reports').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ URL::current() }}',
+                ordering: true,
+                paging: true,
+                searching: true,
+            });
         } );
 
         CKEDITOR.replace('editor');

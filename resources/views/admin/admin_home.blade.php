@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
                     Welcome, <b>{{ Auth::user()->name }}</b><br>
-                    Anda login sebagai admin, anda bisa melakukan manajemen data.
+                    You are logged in as admin, you can see all of the staff report.
                 </div>
             </div>
         </div>
