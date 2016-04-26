@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="7" name="description" placeholder="Description"></textarea>
+                                <textarea class="form-control" rows="10" name="description" placeholder="Description"></textarea>
                                 {{--<textarea id="editor" name="description" rows="7" class="form-control ckeditor" placeholder="Description"></textarea>--}}
                             </div>
                         </div>

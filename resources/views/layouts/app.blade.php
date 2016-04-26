@@ -13,10 +13,10 @@
 
     <!-- Datatables -->
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <link rel="stylesheet" href="{{url('assets/datatables/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{url('assets/datatables/css/dataTables.bootstrap.min.css')}}">
-    <script src="{{ url('assets/datatables/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ url('assets/datatables/js/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{ url('resources/assets/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url('resources/assets/datatables/js/dataTables.bootstrap.min.js')}}"></script>
+    <link rel="stylesheet" href="{{url('resources/assets/datatables/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url('resources/assets/datatables/css/dataTables.bootstrap.min.css')}}">
 
     <!-- CKeditor -->
     <script src="{{ url('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
@@ -103,17 +103,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
-            $('#reports').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ URL::current() }}',
-                ordering: true,
-                paging: true,
-                searching: true,
-            });
+            $('#reports').DataTable();
         } );
 
-        CKEDITOR.replace('editor');
+        CKEDITOR.replace('editor',  {
+            customConfig: '{{ url('vendor/unisharp/laravel-ckeditor/config.js') }}'
+
+        });
     </script>
 </body>
 </html>

@@ -30,11 +30,10 @@ class UserController extends Controller
         $id = Auth::id();
         //Menampilkan semua isi tabel reports berdasarkan id user yang sedang login kedalam variabel
         $report = Reports::where('user_id', '=', $id)->get();
-        
+
         //tampilkan view
         return view('users.user_home', compact('report'));
     }
-
     /**
      * Show the form for creating a new resource.
      *

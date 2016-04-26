@@ -19,7 +19,7 @@
                     @if($report->count())
                     <!-- Tombol create -->
                     <p><a href="{{ url("home/create") }}"><button type="button" class="btn btn-success">Create</button></a></p>
-                    <table cellspacing="0" class="table table-striped table-bordered" id="reports">
+                    <table id="reports" cellspacing="0" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>Report Date</th>
