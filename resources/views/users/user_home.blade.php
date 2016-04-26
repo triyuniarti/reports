@@ -45,13 +45,13 @@
                                             <ul class="dropdown-menu" aria-labelledby="action">
                                                 <li><a href="{{ url("home/preview", $data->id) }}">View</a></li>
                                                 <li><a href="{{ url("home/update", $data->id) }}">Edit</a></li>
-                                                <li><a href="{{ url("home/delete", $data->id) }}"  {{--data-toggle="modal" data-target="#delete"--}}>Delete</a></li>
+                                                <li><a href="#delete_{{ $data->id }}" data-toggle="modal">Delete</a></li>
                                             </ul>
                                         </div>
                                     </td>
                                 </tr>
                                 <!-- Modal -->
-                                <div class="modal fade bs-example-modal-sm" id="delete" role="dialog">
+                                <div class="modal fade bs-example-modal-sm" id="delete_{{ $data->id }}" role="dialog">
                                     <div class="modal-dialog modal-sm">
 
                                         <!-- Modal content-->
@@ -64,7 +64,7 @@
                                                 <p>Are you sure to delete this report?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <a href="{{ url("home/delete", $data->id) }}"><button type="submit" class="btn btn-primary">Yes</button></a>
+                                                <a href="{{ url("home/delete", [$data->id]) }}"><button type="submit" class="btn btn-primary">Yes</button></a>
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                                             </div>
                                         </div>

@@ -107,8 +107,8 @@
         } );
 
         CKEDITOR.replace('editor',  {
-            customConfig: '{{ url('vendor/unisharp/laravel-ckeditor/config.js') }}'
-
+            enterMode : CKEDITOR.ENTER_BR,
+            forcePasteAsPlainText : true
         });
     </script>
 </body>
