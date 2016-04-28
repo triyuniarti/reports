@@ -26,6 +26,22 @@
                                 <input type="date" class="form-control" name="report_date" value="{{ $report->report_date }}">
                             </div>
                         </div>
+                        <div class="form-group{{ $errors->has('category_name') ? ' has-error' : '' }}">
+                            <label class="col-sm-2 control-label">Category</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="category_name">
+                                    <option value="{{ $report->category_name }}">{{ $report->category_name }}</option>
+                                    {{--@foreach($category as $data)
+                                        <option value="{{ $data->category_name }}">{{ $data->category_name }}</option>
+                                    @endforeach--}}
+                                    @if ($errors->has('category_name'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('category_name') }}</strong>
+                                        </span>
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Subject</label>
                             <div class="col-sm-10">

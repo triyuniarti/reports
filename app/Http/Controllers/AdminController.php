@@ -11,6 +11,7 @@ use Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Session;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -76,7 +77,7 @@ class AdminController extends Controller
         }else {
             $name = Input::get('name');
             $email = Input::get('email');
-            $password = bcrypt(Input::get('password'));
+            $password = Hash::make(Input::get('password'));
             $admin = Input::get('admin');
             # Isi kedalam database
             User::create(compact('name', 'email', 'password', 'admin'));

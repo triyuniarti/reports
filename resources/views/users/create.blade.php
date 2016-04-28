@@ -8,7 +8,7 @@
                 <div class="panel-heading">Create Report</div>
 
                 <div class="panel-body">
-                    @if ( $errors->count() > 0 )
+                    {{--@if ( $errors->count() > 0 )
                         <div class="alert alert-danger">
                             <ul>
                                 @foreach( $errors->all() as $message )
@@ -16,27 +16,64 @@
                                 @endforeach
                             </ul>
                         </div>
-                    @endif
+                    @endif--}}
                     <form class="form-horizontal" method="post" action="{{ url("home/create") }}">
                         {!! csrf_field() !!}
 
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('report_date') ? ' has-error' : '' }}">
                             <label class="col-sm-2 control-label">Report Date</label>
                             <div class="col-sm-10">
                                 <input type="date" class="form-control" name="report_date" placeholder="Report Date">
+                                @if ($errors->has('report_date'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('report_date') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('category_name') ? ' has-error' : '' }}">
+                            <label class="col-sm-2 control-label">Category</label>
+                            <div class="col-sm-10">
+                                @if($category->count())
+                                    <select class="form-control" name="category_name">
+                                        <option>-- Choose --</option>
+                                        @foreach($category as $data)
+                                            <option value="{{ $data->category_name }}">{{ $data->category_name }}</option>
+                                        @endforeach
+                                        @if ($errors->has('category_name'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('category_name') }}</strong>
+                                            </span>
+                                        @endif
+                                    </select>
+                                @else
+                                    <select class="form-control" disabled>
+                                        <option>Please add category</option>
+                                    </select>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('subject') ? ' has-error' : '' }}">
                             <label class="col-sm-2 control-label">Subject</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="subject" placeholder="Subject">
+                                @if ($errors->has('subject'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('subject') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                             <label class="col-sm-2 control-label">Description</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" rows="10" name="description" placeholder="Description"></textarea>
                                 {{--<textarea id="editor" name="description" rows="7" class="form-control ckeditor" placeholder="Description"></textarea>--}}
+                                @if ($errors->has('description'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group">

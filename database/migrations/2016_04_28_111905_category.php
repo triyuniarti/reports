@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ReportsUser extends Migration
+class Category extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,13 @@ class ReportsUser extends Migration
      */
     public function up()
     {
-        Schema::create('reports', function (Blueprint $table) {
+        Schema::create('category', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->date('report_date');
             $table->string('category_name');
-            $table->string('subject');
-            $table->text('description');
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -30,6 +26,6 @@ class ReportsUser extends Migration
      */
     public function down()
     {
-        Schema::drop('reports');
+        Schema::drop('category');
     }
 }

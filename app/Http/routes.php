@@ -50,6 +50,8 @@ Route::get('home/create', 'UserController@create');
 
 Route::post('home/create', 'UserController@store');
 
+Route::post('home/add-category', 'UserController@addCategory');
+
 Route::get('home/preview/{id}', 'UserController@show');
 
 Route::get('home/update/{id}', 'UserController@edit');

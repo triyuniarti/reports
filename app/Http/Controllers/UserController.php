@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Reports;
 use App\User;
+use App\Category;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -41,28 +42,31 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $category = Category::all();
+        return view('users.create', compact('category'));
     }
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'report_date' => 'required',
+            'category_name' => 'required|not_in:-- Choose --',
             'subject' => 'required | min:3',
             'description' => 'required | min:10'
         ]);
 
         if($validator->fails()){
             return redirect('home/create')
-                ->withErrors($validator)
-                ->withInput();
+                ->withInput()
+                ->withErrors($validator);
         }else {
             $user_id = Auth::id();
             $report_date = Input::get('report_date');
+            $category_name = Input::get('category_name');
             $subject = Input::get('subject');
             $description = Input::get('description');
             # Isi kedalam database
-            Reports::create(compact('user_id', 'report_date', 'subject', 'description'));
+            Reports::create(compact('user_id', 'report_date', 'category_name', 'subject', 'description'));
             Session::flash('message', 'Successfully created report!');
             return Redirect::to('/home');
         }
@@ -158,7 +162,7 @@ class UserController extends Controller
             $user = Auth::id();
             $db_oldpass = User::find($user)->password;
             $old_pass = Input::get('old_password');
-            $new_pass = bcrypt(Input::get('new_password'));
+            $new_pass = Hash::make(Input::get('new_password'));
 
             if(Hash::check($old_pass, $db_oldpass)){
                 //save new password
@@ -174,5 +178,16 @@ class UserController extends Controller
             }
 
         }
+    }
+
+    public function addCategory(Request $request)
+    {
+        $category_name = Input::get('category_name');
+
+        # Isi kedalam database
+        Category::create(compact('category_name'));
+        Session::flash('message', 'Successfully added category!');
+        return Redirect::to('/home');
+
     }
 }

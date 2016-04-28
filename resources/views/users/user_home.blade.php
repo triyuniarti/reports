@@ -18,11 +18,15 @@
                     <!-- Jika tabel biodata memiliki isi-->
                     @if($report->count())
                     <!-- Tombol create -->
-                    <p><a href="{{ url("home/create") }}"><button type="button" class="btn btn-success">Create</button></a></p>
+                    <div class="btn-create">
+                        <a href="{{ url("home/create") }}"><button type="button" class="btn btn-success">Add Category Report</button></a>
+                        <a href="{{ url("home/create") }}"><button type="button" class="btn btn-primary">Create Report</button></a>
+                    </div>
                     <table id="reports" cellspacing="0" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>Report Date</th>
+                                <th>Category</th>
                                 <th>Subject</th>
                                 <th>Description</th>
                                 <th>Action</th>
@@ -33,6 +37,7 @@
                             @foreach($report as $data)
                                 <tr>
                                     <td>{{ $data->report_date }}</td>
+                                    <td>{{ $data->category_name }}</td>
                                     <td>{{ $data->subject }}</td>
                                     <td>{{ $data->description }}</td>
                                     <!-- Tombol Action -->
@@ -50,7 +55,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <!-- Modal -->
+                                <!-- Modal for delete -->
                                 <div class="modal fade bs-example-modal-sm" id="delete_{{ $data->id }}" role="dialog">
                                     <div class="modal-dialog modal-sm">
 
@@ -75,11 +80,46 @@
                     </table>
                     <!-- Sedangkan, bila tidak ada isinya, tampilkan isi berikut -->
                     @else
-                        <p><a href="{{ url("home/create") }}"><button class="btn btn-primary">Create</button></a></p>
+                        <a href="#add-category" data-toggle="modal"><button type="button" class="btn btn-success">Add Category Report</button></a>
+                        <a href="{{ url("home/create") }}"><button class="btn btn-primary">Create Report</button></a>
                         <p>No result.</p>
                     @endif
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for add category -->
+<div class="modal fade" id="add-category" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add Category Report</h4>
+            </div>
+            <form class="form-horizontal" method="post" action="{{ url('home/add-category') }}">
+                {!! csrf_field() !!}
+                <div class="modal-body">
+                    <div class="form-group{{ $errors->has('category_name') ? ' has-error' : '' }}">
+                        <label class="col-sm-3 control-label">Category Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="category_name" placeholder="Category Name" minlength="3" required>
+
+                            @if ($errors->has('category_name'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('category_name') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ url("home/delete") }}"><button type="submit" class="btn btn-primary">Create</button></a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

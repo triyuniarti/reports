@@ -10,5 +10,5 @@ class Reports extends Model
     protected $table = 'reports';
 
     //field apa saja yang diperbolehkan menerima inputan
-    protected $fillable = array('user_id', 'report_date', 'subject', 'description');
+    protected $fillable = array('user_id', 'category_name', 'report_date', 'subject', 'description');
 }

@@ -17,6 +17,7 @@
                         <thead>
                             <tr>
                                 <th>Report Date</th>
+                                <th>Category</th>
                                 <th>Name</th>
                                 <th>Subject</th>
                                 <th>Description</th>
@@ -28,6 +29,7 @@
                             @foreach($report as $data)
                                 <tr>
                                     <td>{{ $data->report_date }}</td>
+                                    <td>{{ $data->category_name }}</td>
                                     <td>{{ $data->name }}</td>
                                     <td>{{ $data->subject }}</td>
                                     <td>{{ $data->description }}</td>
