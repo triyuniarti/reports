@@ -9,4 +9,9 @@ class Category extends Model
     protected $table = 'Category';
 
     protected $fillable = array('category_name');
+
+    public function report()
+    {
+        return $this->hasMany('App\Reports');
+    }
 }

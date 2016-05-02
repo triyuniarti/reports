@@ -18,7 +18,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Category</label>
                             <div class="col-sm-10">
-                                {{ $report->category_name }}
+                                {{ $report->category->category_name }}
                             </div>
                         </div>
                         <div class="form-group">

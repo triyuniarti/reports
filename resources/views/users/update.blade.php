@@ -17,6 +17,7 @@
                             </ul>
                         </div>
                     @endif
+                    {{--@foreach($reports as $report)--}}
                     <form class="form-horizontal" method="post" action="{{ url("home/update", $report->id) }}">
                         {!! csrf_field() !!}
 
@@ -26,17 +27,17 @@
                                 <input type="date" class="form-control" name="report_date" value="{{ $report->report_date }}">
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('category_name') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
                             <label class="col-sm-2 control-label">Category</label>
                             <div class="col-sm-10">
-                                <select class="form-control" name="category_name">
-                                    <option value="{{ $report->category_name }}">{{ $report->category_name }}</option>
+                                <select class="form-control" name="category_id">
+                                    <option value="{{ $report->category->category_id }}">{{ $report->category->category_name }}</option>
                                     {{--@foreach($category as $data)
-                                        <option value="{{ $data->category_name }}">{{ $data->category_name }}</option>
+                                        <option value="{{ $data->id }}">{{ $data->category_name }}</option>
                                     @endforeach--}}
                                     @if ($errors->has('category_name'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('category_name') }}</strong>
+                                            <strong>{{ $errors->first('category_id') }}</strong>
                                         </span>
                                     @endif
                                 </select>
@@ -62,6 +63,7 @@
                             </div>
                         </div>
                     </form>
+                    {{--@endforeach--}}
                 </div>
             </div>
         </div>

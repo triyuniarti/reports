@@ -28,7 +28,8 @@ class AdminController extends Controller
     public function listReport(){
         //Menampilkan semua isi tabel reports kedalam variabel
         $report = Reports::join('users', 'reports.user_id', '=', 'users.id')
-            ->select('reports.*', 'users.name')
+            ->join('category', 'reports.category_id', '=', 'category.id')
+            ->select('reports.*', 'users.name', 'category.category_name')
             ->where('admin', '=', 0)
             ->get();
 

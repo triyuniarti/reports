@@ -19,7 +19,7 @@
                     @if($report->count())
                     <!-- Tombol create -->
                     <div class="btn-create">
-                        <a href="{{ url("home/create") }}"><button type="button" class="btn btn-success">Add Category Report</button></a>
+                        <a href="#add-category" data-toggle="modal"><button type="button" class="btn btn-success">Add Category Report</button></a>
                         <a href="{{ url("home/create") }}"><button type="button" class="btn btn-primary">Create Report</button></a>
                     </div>
                     <table id="reports" cellspacing="0" class="table table-striped table-bordered">
@@ -37,7 +37,7 @@
                             @foreach($report as $data)
                                 <tr>
                                     <td>{{ $data->report_date }}</td>
-                                    <td>{{ $data->category_name }}</td>
+                                    <td>{{ $data->category->category_name }}</td>
                                     <td>{{ $data->subject }}</td>
                                     <td>{{ $data->description }}</td>
                                     <!-- Tombol Action -->

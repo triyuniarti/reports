@@ -31,18 +31,18 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('category_name') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
                             <label class="col-sm-2 control-label">Category</label>
                             <div class="col-sm-10">
                                 @if($category->count())
-                                    <select class="form-control" name="category_name">
+                                    <select class="form-control" name="category_id">
                                         <option>-- Choose --</option>
                                         @foreach($category as $data)
-                                            <option value="{{ $data->category_name }}">{{ $data->category_name }}</option>
+                                            <option value="{{ $data->id }}">{{ $data->category_name }}</option>
                                         @endforeach
-                                        @if ($errors->has('category_name'))
+                                        @if ($errors->has('category_id'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('category_name') }}</strong>
+                                                <strong>{{ $errors->first('category_id') }}</strong>
                                             </span>
                                         @endif
                                     </select>

@@ -17,7 +17,8 @@ class ReportsUser extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->date('report_date');
-            $table->string('category_name');
+            $table->integer('category_id')->unsigned();
+            //$table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
             $table->string('subject');
             $table->text('description');
             $table->timestamps();

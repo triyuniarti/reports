@@ -30,7 +30,8 @@ class UserController extends Controller
     {
         $id = Auth::id();
         //Menampilkan semua isi tabel reports berdasarkan id user yang sedang login kedalam variabel
-        $report = Reports::where('user_id', '=', $id)->get();
+        $report = Reports::where('user_id', '=', $id)
+            ->get();
 
         //tampilkan view
         return view('users.user_home', compact('report'));
@@ -50,7 +51,7 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'report_date' => 'required',
-            'category_name' => 'required|not_in:-- Choose --',
+            'category_id' => 'required|not_in:-- Choose --',
             'subject' => 'required | min:3',
             'description' => 'required | min:10'
         ]);
@@ -62,11 +63,11 @@ class UserController extends Controller
         }else {
             $user_id = Auth::id();
             $report_date = Input::get('report_date');
-            $category_name = Input::get('category_name');
+            $category_id = Input::get('category_id');
             $subject = Input::get('subject');
             $description = Input::get('description');
             # Isi kedalam database
-            Reports::create(compact('user_id', 'report_date', 'category_name', 'subject', 'description'));
+            Reports::create(compact('user_id', 'report_date', 'category_id', 'subject', 'description'));
             Session::flash('message', 'Successfully created report!');
             return Redirect::to('/home');
         }
@@ -82,6 +83,7 @@ class UserController extends Controller
     {
         # Mengambil data dalam berdasarkan berdasarkan id
         $report = Reports::find($id);
+        
         # Menampilkan view
         return View('users.preview', compact('report'));
     }
@@ -95,7 +97,12 @@ class UserController extends Controller
     public function edit($id)
     {
         $report = Reports::find($id);
-        return view('users.update', compact('report'));
+        /*$reports = Reports::join('category', 'reports.category_id', '=', 'category.id')
+            ->select('reports.*', 'category.category_name')
+            ->where('reports.id', '=', $id)
+            ->get();*/
+        $category = Category::all();
+        return view('users.update', compact('report', 'category'));
     }
 
     /**
@@ -111,6 +118,7 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'report_date' => 'required',
+            'category_id' => 'required|not_in:-- Choose --',
             'subject' => 'required | min:3',
             'description' => 'required | min:10'
         ]);
