@@ -48,6 +48,15 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Report Date</th>
+                                <th>Category</th>
+                                <th>Name</th>
+                                <th>Subject</th>
+                                <th style="border-right-width: 1px">Description</th>
+                            </tr>
+                        </tfoot>
                     </table>
                     <!-- bila tidak ada isinya -->
                     @else
