@@ -17,7 +17,7 @@
                             </ul>
                         </div>
                     @endif--}}
-                    <form class="form-horizontal" method="post" action="{{ url("home/create") }}">
+                    <form class="form-horizontal" method="post" action="{{ url("home/create") }}" enctype="multipart/form-data">
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('report_date') ? ' has-error' : '' }}">
@@ -72,6 +72,17 @@
                                 @if ($errors->has('description'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('attachments') ? ' has-error' : '' }}">
+                            <label class="col-sm-2 control-label">Upload</label>
+                            <div class="col-sm-10">
+                                <input id="attachments" name="attachments" type="file" class="file">
+                                @if ($errors->has('description'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('attachments') }}</strong>
                                     </span>
                                 @endif
                             </div>

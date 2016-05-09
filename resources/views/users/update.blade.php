@@ -31,10 +31,14 @@
                             <label class="col-sm-2 control-label">Category</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="category_id">
-                                    <option value="{{ $report->category->category_id }}">{{ $report->category->category_name }}</option>
-                                    {{--@foreach($category as $data)
-                                        <option value="{{ $data->id }}">{{ $data->category_name }}</option>
-                                    @endforeach--}}
+                                    {{--<option value="{{ $report->category->id }}">{{ $report->category->category_name }}</option>--}}
+                                    @foreach($category as $data)
+                                        @if($data->id == $report->category->id )
+                                            <option value="{{ $data->id }}" selected>{{ $data->category_name }}</option>
+                                        @else
+                                            <option value="{{ $data->id }}">{{ $data->category_name }}</option>
+                                        @endif
+                                    @endforeach
                                     @if ($errors->has('category_name'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('category_id') }}</strong>

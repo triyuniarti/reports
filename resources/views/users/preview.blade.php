@@ -34,6 +34,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-2 control-label">Attachments</label>
+                            <div class="col-sm-10">
+                                {{--{{ $attachment->description }}--}}
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-md-4">
                                 @if(Auth::user()->admin == 1)
                                     <a href="{{ url("home/reports") }}"><button class="btn btn-primary">Back</button></a>

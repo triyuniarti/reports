@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Attachments;
 use App\Reports;
 use App\User;
 use App\Category;
@@ -61,13 +62,26 @@ class UserController extends Controller
                 ->withInput()
                 ->withErrors($validator);
         }else {
+            $attachments = new Attachments;
+            //upload image
+            $file = $request->file('attachments');
+            $destination_path = 'resources/assets/uploads/';
+            $filename = str_random(6).'_'.$file->getClientOriginalName();
+            $file->move($destination_path, $filename);
+
             $user_id = Auth::id();
             $report_date = Input::get('report_date');
             $category_id = Input::get('category_id');
             $subject = Input::get('subject');
             $description = Input::get('description');
-            # Isi kedalam database
+            # Save reports into database
             Reports::create(compact('user_id', 'report_date', 'category_id', 'subject', 'description'));
+
+            //save image data into database
+            $attachments->report_id = 1;
+            $attachments->file_name = $destination_path . $filename;
+            $attachments->save();
+
             Session::flash('message', 'Successfully created report!');
             return Redirect::to('/home');
         }
@@ -83,6 +97,10 @@ class UserController extends Controller
     {
         # Mengambil data dalam berdasarkan berdasarkan id
         $report = Reports::find($id);
+        /*$attachment = Attachments::join('reports', 'attachments.reports_id', '=', 'reports.id')
+            ->select('attachments.*', 'reports.*')
+            ->where('attachments.reports_id', '=', $id)
+            ->get();*/
         
         # Menampilkan view
         return View('users.preview', compact('report'));

@@ -18,6 +18,11 @@
     <link rel="stylesheet" href="{{url('resources/assets/datatables/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url('resources/assets/datatables/css/dataTables.bootstrap.min.css')}}">
 
+    <!-- Bootstrap file upload -->
+    <link rel="stylesheet" href="{{ url('vendor/kartik-v/bootstrap-fileinput/css/fileinput.min.css') }}" media="all">
+    <script src="{{url('vendor/kartik-v/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js')}}" type="text/javascript"></script>
+    <script src="{{url('vendor/kartik-v/bootstrap-fileinput/js/fileinput.min.js')}}" type="text/javascript"></script>
+
     <!-- CKeditor -->
     <script src="{{ url('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
 
@@ -126,6 +131,13 @@
                 }
             });
         } );
+
+        $("#attachments").fileinput(/*{
+            showUpload: false,
+            maxFileCount: 10,
+            showCaption: true,
+            showPreview: true
+        }*/);
 
         CKEDITOR.replace('editor',  {
             enterMode : CKEDITOR.ENTER_BR,

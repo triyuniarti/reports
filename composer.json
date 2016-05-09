@@ -10,7 +10,7 @@
         "yajra/laravel-datatables-oracle": "6.0",
         "illuminate/html": "^5.0",
         "unisharp/laravel-ckeditor": "^4.5",
-        "blueimp/jquery-file-upload": "^9.12"
+        "kartik-v/bootstrap-fileinput": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
