@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Attachments</label>
                             <div class="col-sm-10">
-                                {{--{{ $attachment->description }}--}}
+                                <img src="{{ url($attachments->file_name) }}" width="300px" height="150px">
                             </div>
                         </div>
                         <div class="form-group">

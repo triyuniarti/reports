@@ -18,7 +18,7 @@
                         </div>
                     @endif
                     {{--@foreach($reports as $report)--}}
-                    <form class="form-horizontal" method="post" action="{{ url("home/update", $report->id) }}">
+                    <form class="form-horizontal" method="post" action="{{ url("home/update", $report->id) }}" enctype="multipart/form-data">
                         {!! csrf_field() !!}
 
                         <div class="form-group">
@@ -58,6 +58,13 @@
                             <div class="col-sm-10">
                                 <textarea class="form-control" rows="10" name="description">{{ $report->description }}</textarea>
                                 {{--<textarea id="editor" name="description" rows="7" class="form-control ckeditor">{{ $report->description }}</textarea>--}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Attachments</label>
+                            <div class="col-sm-10">
+                                <img src="{{ url($attachments->file_name) }}" width="300px" height="150px">
+                                <input id="attachments" name="attachments" type="file" class="file">
                             </div>
                         </div>
                         <div class="form-group">

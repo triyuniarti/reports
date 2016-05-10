@@ -21,9 +21,4 @@ class Reports extends Model
     {
         return $this->belongsTo('App\Category');
     }
-    
-    public function attachments()
-    {
-        return $this->hasMany('App\Attachments');
-    }
 }

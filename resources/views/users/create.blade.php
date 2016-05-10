@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('attachments') ? ' has-error' : '' }}">
-                            <label class="col-sm-2 control-label">Upload</label>
+                            <label class="col-sm-2 control-label">Attachments</label>
                             <div class="col-sm-10">
                                 <input id="attachments" name="attachments" type="file" class="file">
                                 @if ($errors->has('description'))

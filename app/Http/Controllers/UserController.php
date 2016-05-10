@@ -45,11 +45,15 @@ class UserController extends Controller
     public function create()
     {
         $category = Category::all();
+
         return view('users.create', compact('category'));
     }
 
     public function store(Request $request)
     {
+        /*$id = Reports::select('id')->orderBy('id', 'desc')->first();
+
+        var_dump($id);*/
         $validator = Validator::make($request->all(), [
             'report_date' => 'required',
             'category_id' => 'required|not_in:-- Choose --',
@@ -97,13 +101,10 @@ class UserController extends Controller
     {
         # Mengambil data dalam berdasarkan berdasarkan id
         $report = Reports::find($id);
-        /*$attachment = Attachments::join('reports', 'attachments.reports_id', '=', 'reports.id')
-            ->select('attachments.*', 'reports.*')
-            ->where('attachments.reports_id', '=', $id)
-            ->get();*/
-        
+        $attachments = Attachments::where('reports_id', '=', $id)->get()->first();
+
         # Menampilkan view
-        return View('users.preview', compact('report'));
+        return View('users.preview', compact('report', 'attachments'));
     }
 
     /**
@@ -120,7 +121,8 @@ class UserController extends Controller
             ->where('reports.id', '=', $id)
             ->get();*/
         $category = Category::all();
-        return view('users.update', compact('report', 'category'));
+        $attachments = Attachments::where('reports_id', '=', $id)->get()->first();
+        return view('users.update', compact('report', 'category', 'attachments'));
     }
 
     /**
@@ -133,6 +135,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $update = Reports::findOrFail($id);
+        $attachments = Attachments::where('reports_id', '=', $id)->get()->first();
 
         $validator = Validator::make($request->all(), [
             'report_date' => 'required',
@@ -146,8 +149,21 @@ class UserController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }else {
+            if($request->hasFile('attachments'))
+            {
+                $file = $request->file('attachments');
+                $destination_path = 'resources/assets/uploads/';
+                $filename = str_random(6).'_'.$file->getClientOriginalName();
+                $file->move($destination_path, $filename);
+                $attachments->file_name = $destination_path . $filename;
+            }
+
             $input = $request->all();
             $update->fill($input)->save();
+
+            $attachments->reports_id = $id;
+            $attachments->save();
+
             Session::flash('message', 'Successfully updated report!');
             return Redirect::to('/home');
         }
